@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MyWebsite.Extensions;
 
 namespace MyWebsite
 {
@@ -33,6 +34,9 @@ namespace MyWebsite
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostApplicationLifetime appLifetime)
         {
+            //Middleware
+            app.UseMiddleware();
+
             #region appLifetime
             appLifetime.ApplicationStarted.Register(() =>
             {
