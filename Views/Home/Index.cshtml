@@ -1,9 +1,11 @@
-﻿@using MyWebsite
-@using MyWebsite.Controllers
+﻿@using MyWebsite.Controllers
+@using MyWebsite.Services
 
 @inject ISampleTransient transient
 @inject ISampleScoped scoped
 @inject ISampleSingleton singleton
+@inject InjectionService injectionService
+
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -27,4 +29,12 @@
     <tr><td>Transient</td><td>@transient.Id</td><td>@transient.GetHashCode()</td></tr>
     <tr><td>Scoped</td><td>@scoped.Id</td><td>@scoped.GetHashCode()</td></tr>
     <tr><td>Singleton</td><td>@singleton.Id</td><td>@singleton.GetHashCode()</td></tr>
+</table>
+<hr />
+<table border="1">
+    <tr><td colspan="3">Injection Service</td></tr>
+    <tr><td>Lifetimes</td><td>Id</td><td>Hash Code</td></tr>
+    <tr><td>Transient</td><td>@injectionService.Transient.Id</td><td>@injectionService.Transient.GetHashCode()</td></tr>
+    <tr><td>Scoped</td><td>@injectionService.Scoped.Id</td><td>@injectionService.Scoped.GetHashCode()</td></tr>
+    <tr><td>Singleton</td><td>@injectionService.Singleton.Id</td><td>@injectionService.Singleton.GetHashCode()</td></tr>
 </table>

@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MyWebsite.Controllers;
 using MyWebsite.Extensions;
+using MyWebsite.Services;
 
 namespace MyWebsite
 {
@@ -30,13 +31,18 @@ namespace MyWebsite
         {
             Program.Output("Startup.ConfigureServices - Called");
             services.AddControllersWithViews();
-            services.AddScoped<ISample, Sample>();
-            //DI
+
+            #region DI
+            //Controller
             services.AddTransient<ISampleTransient, Sample>();
             services.AddScoped<ISampleScoped, Sample>();
             services.AddSingleton<ISampleSingleton, Sample>();
             // Singleton 也可以用以下方法註冊
             // services.AddSingleton<ISampleSingleton>(new Sample());
+
+            //Service
+            services.AddScoped<InjectionService, InjectionService>();
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
